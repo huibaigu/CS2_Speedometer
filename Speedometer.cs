@@ -1,12 +1,16 @@
 using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
+using CounterStrikeSharp.API.Core.Attributes;
+using CounterStrikeSharp.API.Core.Attributes.Registration;
+using CounterStrikeSharp.API.Modules.Admin;
+using CounterStrikeSharp.API.Modules.Commands;
 
 namespace Speedometer;
 
 public class Speedometer : BasePlugin
 {
     public override string ModuleName => "Speedometer by phantom";
-    public override string ModuleVersion => "1.0.0";
+    public override string ModuleVersion => "1.0.1";
 
     private UsersSettings?[] _usersSettings = new UsersSettings?[65];
     private bool isHookEvent;
@@ -15,7 +19,7 @@ public class Speedometer : BasePlugin
     {
         RegisterListener<Listeners.OnClientConnected>(((slot) =>
         {
-            _usersSettings[slot + 1] = new UsersSettings { IsShowSpeed = true, CountJumps = 0 };
+            _usersSettings[slot + 1] = new UsersSettings { IsShowSpeed = true, JumpSpeed = 0 };
         }));
         RegisterListener<Listeners.OnClientDisconnectPost>(slot => _usersSettings[slot + 1] = null);
         RegisterListener<Listeners.OnMapStart>((name =>
@@ -30,7 +34,7 @@ public class Speedometer : BasePlugin
                 var client = controller.Index;
 
                 if (client == IntPtr.Zero) return HookResult.Continue;
-                _usersSettings[client]!.CountJumps++;
+                _usersSettings[client]!.JumpSpeed=(int)controller.PlayerPawn.Value.AbsVelocity.Length2D();
 
                 return HookResult.Continue;
             }));
@@ -41,7 +45,7 @@ public class Speedometer : BasePlugin
             foreach (var player in playerEntities)
             {
                 var client = player.Index;
-                _usersSettings[client]!.CountJumps = 0;
+                _usersSettings[client]!.JumpSpeed = 0;
             }
             return HookResult.Continue;
         }));
@@ -61,11 +65,10 @@ public class Speedometer : BasePlugin
                     if (player.PlayerPawn.Value == null) continue;
                     
                     player.PrintToCenterHtml(
-                        $"<pre>Speed: <font color='#00FF00'>{Math.Round(player.PlayerPawn.Value.AbsVelocity.Length2D())}</font><br>" +
-                        $"Jumps: <font color='#00ffea'>{_usersSettings[client]!.CountJumps}</font><br>" +
-                        $"{((buttons & PlayerButtons.Left) != 0 ? "←" : "_")} " +
+                        $"<pre>Speed: <font color='#00FF00'>{Math.Round(player.PlayerPawn.Value.AbsVelocity.Length2D())}</font><font color='#00ffea'>({_usersSettings[client]!.JumpSpeed})</font><br>" +
+                        $"{((buttons & PlayerButtons.Duck) != 0 ? "C" : "_")} " +
                         $"{((buttons & PlayerButtons.Forward) != 0 ? "W" : "_")} " +
-                        $"{((buttons & PlayerButtons.Right) != 0 ? "→" : "_")}<br>" +
+                        $"{((buttons & PlayerButtons.Jump) != 0 ? "J" : "_")}<br>" +
                         $"{((buttons & PlayerButtons.Moveleft) != 0 ? "A" : "_")} " +
                         $"{((buttons & PlayerButtons.Back) != 0 ? "S" : "_")} " +
                         $"{((buttons & PlayerButtons.Moveright) != 0 ? "D" : "_")} </pre>");
@@ -79,7 +82,7 @@ public class Speedometer : BasePlugin
             var controller = @event.Userid;
             var client = controller.Index;
             if (client == IntPtr.Zero) return HookResult.Continue;
-            _usersSettings[client]!.CountJumps = 0;
+            _usersSettings[client]!.JumpSpeed = 0;
 
             return HookResult.Continue;
         }));
@@ -100,6 +103,6 @@ public class Speedometer : BasePlugin
 
 public class UsersSettings
 {
-    public int CountJumps { get; set; }
+    public int JumpSpeed { get; set; }
     public bool IsShowSpeed { get; set; }
 }

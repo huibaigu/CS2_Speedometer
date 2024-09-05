@@ -1,0 +1,14 @@
+D:\cs2_servers\game\csgo\addons_code\Speedometer\obj\Debug\net8.0\Speedometer.csproj.AssemblyReference.cache
+D:\cs2_servers\game\csgo\addons_code\Speedometer\obj\Debug\net8.0\Speedometer.GeneratedMSBuildEditorConfig.editorconfig
+D:\cs2_servers\game\csgo\addons_code\Speedometer\obj\Debug\net8.0\Speedometer.AssemblyInfoInputs.cache
+D:\cs2_servers\game\csgo\addons_code\Speedometer\obj\Debug\net8.0\Speedometer.AssemblyInfo.cs
+D:\cs2_servers\game\csgo\addons_code\Speedometer\obj\Debug\net8.0\Speedometer.csproj.CoreCompileInputs.cache
+D:\cs2_servers\game\csgo\addons_code\Speedometer\bin\Debug\net8.0\Speedometer.deps.json
+D:\cs2_servers\game\csgo\addons_code\Speedometer\bin\Debug\net8.0\Speedometer.dll
+D:\cs2_servers\game\csgo\addons_code\Speedometer\bin\Debug\net8.0\Speedometer.pdb
+D:\cs2_servers\game\csgo\addons_code\Speedometer\bin\Debug\net8.0\CounterStrikeSharp.API.dll
+D:\cs2_servers\game\csgo\addons_code\Speedometer\obj\Debug\net8.0\Speedome.EFFBB134.Up2Date
+D:\cs2_servers\game\csgo\addons_code\Speedometer\obj\Debug\net8.0\Speedometer.dll
+D:\cs2_servers\game\csgo\addons_code\Speedometer\obj\Debug\net8.0\refint\Speedometer.dll
+D:\cs2_servers\game\csgo\addons_code\Speedometer\obj\Debug\net8.0\Speedometer.pdb
+D:\cs2_servers\game\csgo\addons_code\Speedometer\obj\Debug\net8.0\ref\Speedometer.dll
